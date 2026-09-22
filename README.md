@@ -52,7 +52,6 @@ development, systems infrastructure, and observability.
 
 <p align="left">
   <img height="165" src="./profile/streak.svg" alt="GitHub Streak" />
-  <img height="165" src="https://github-profile-trophy-diogocouto18.vercel.app/?username=diogocouto18&theme=dark&no-frame=true&margin-w=8&row=1" />
 </p>
 
 <p align="left">
