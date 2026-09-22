@@ -50,6 +50,15 @@ development, systems infrastructure, and observability.
   <img height="165" src="https://github-readme-stats-diogocouto18.vercel.app/api/top-langs/?username=diogocouto18&layout=compact&hide_border=true&theme=dark" />
 </p>
 
+<p align="left">
+  <img height="165" src="./profile/streak.svg" alt="GitHub Streak" />
+  <img height="165" src="https://github-profile-trophy-diogocouto18.vercel.app/?username=diogocouto18&theme=dark&no-frame=true&margin-w=8&row=1" />
+</p>
+
+<p align="left">
+  <img src="https://github-readme-activity-graph-diogoc.vercel.app/graph?username=diogocouto18&theme=react-dark&hide_border=true" />
+</p>
+
 ## Connect
 
 [![LinkedIn](https://img.shields.io/badge/-LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/diogocouto18/)
