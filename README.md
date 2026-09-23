@@ -4,7 +4,7 @@ IT Engineer at [Displax](https://www.displax.com) with a background spanning sof
 development, systems infrastructure, DevOps and observability.
 
 - Bachelor's degree in Computer Systems Engineering, IPCA (2024–2026)
-- Currently focused on IT infrastructure, monitoring, and internal tooling at Displax
+- Currently focused on IT infrastructure, monitoring and internal tooling at Displax
 - Built hands-on experience in log monitoring and observability through internships at
   YouOn (ELK stack) and Displax (Graylog, Grafana, Prometheus), before joining Displax
   full-time
