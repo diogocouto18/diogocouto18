@@ -9,6 +9,12 @@ development, systems infrastructure, DevOps and observability.
   YouOn (ELK stack) and Displax (Graylog, Grafana, Prometheus), before joining Displax
   full-time
 - Exploring MCP (Model Context Protocol) servers to extend and automate developer workflows
+- Open-sourced a [blog cover image generator](https://github.com/diogocouto18/blog-cover-generator)
+  (Heroicons + Playwright, no AI image service needed)
+- Published a reusable [CI/CD pipeline template](https://github.com/diogocouto18/ci-cd-pipeline-template)
+  (feature branch → PR → CI → auto-merge → deploy)
+- Documented a [Checkmk agent legacy-init fix](https://github.com/diogocouto18/checkmk-agent-legacy-init)
+  for systemd-less Linux hosts
 - Building [dev-hub](https://diogocouto.dev), a personal project with a full CI/CD
   pipeline (feature branch → PR → CI → auto-merge → deploy)
 - Building IT NOC Hub, a status and monitoring portal
