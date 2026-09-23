@@ -53,7 +53,7 @@ development, systems infrastructure, DevOps and observability.
 ## GitHub Stats
 
 <p align="left">
-  <img height="165" src="https://github-readme-stats-diogocouto18.vercel.app/api?username=diogocouto18&show_icons=true&theme=dark&hide_border=true&count_private=true" />
+  <img height="165" src="https://github-readme-stats-diogocouto18.vercel.app/api?username=diogocouto18&show_icons=true&theme=dark&hide_border=true&count_private=true&show=reviews" />
   <img height="165" src="https://github-readme-stats-diogocouto18.vercel.app/api/top-langs/?username=diogocouto18&layout=compact&hide_border=true&theme=dark" />
 </p>
 
