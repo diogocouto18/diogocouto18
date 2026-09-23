@@ -1,7 +1,7 @@
 # Diogo Couto
 
-IT Technician at [Displax](https://www.displax.com), with a background spanning software
-development, systems infrastructure, and observability.
+IT Engineer at [Displax](https://www.displax.com) with a background spanning software
+development, systems infrastructure, DevOps and observability.
 
 - Bachelor's degree in Computer Systems Engineering, IPCA (2024–2026)
 - Currently focused on IT infrastructure, monitoring, and internal tooling at Displax
