@@ -9,6 +9,9 @@ development, systems infrastructure, DevOps and observability.
   YouOn (ELK stack) and Displax (Graylog, Grafana, Prometheus), before joining Displax
   full-time
 - Exploring MCP (Model Context Protocol) servers to extend and automate developer workflows
+- Currently building [working-agents](https://github.com/diogocouto18/working-agents), a live
+  monitor that renders running Claude Code sessions as an animated pixel-art office —
+  real status, token usage and cost per session, read straight from the session files
 - Open-sourced a [blog cover image generator](https://github.com/diogocouto18/blog-cover-generator)
   (Heroicons + Playwright, no AI image service needed)
 - Published a reusable [CI/CD pipeline template](https://github.com/diogocouto18/ci-cd-pipeline-template)
@@ -18,7 +21,6 @@ development, systems infrastructure, DevOps and observability.
 - Building [dev-hub](https://diogocouto.dev), a personal project with a full CI/CD
   pipeline (feature branch → PR → CI → auto-merge → deploy)
 - Building IT NOC Hub, a status and monitoring portal
-- Developing working-agents, a real-time 3D bridge app built with Three.js
 - Exploring a multi-store e-commerce platform powered by AI (Shopify + Dev MCP)
 
 ## Tech Stack
