@@ -20,8 +20,8 @@ development, systems infrastructure, DevOps and observability.
   for systemd-less Linux hosts
 - Building [dev-hub](https://diogocouto.dev), a personal project with a full CI/CD
   pipeline (feature branch → PR → CI → auto-merge → deploy)
-- Building IT NOC Hub, a status and monitoring portal
-- Exploring a multi-store e-commerce platform powered by AI (Shopify + Dev MCP)
+- Prototyped IT NOC Hub, a status and monitoring portal for internal infrastructure
+  (currently paused)
 
 ## Tech Stack
 
