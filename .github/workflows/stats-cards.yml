@@ -1,9 +1,9 @@
 name: Stats cards
 
-# Weekly health check + snapshot refresh for the self-hosted github-readme-stats
-# instance. The README embeds the committed SVG snapshots in assets/, so the
-# profile keeps rendering even if the Vercel host is down or its PAT expired.
-# A failed run makes GitHub email the repository owner.
+# Weekly health check for the self-hosted github-readme-stats instance that
+# serves the live cards in the README. A failed run makes GitHub email the
+# repository owner, so an expired PAT or a down host is noticed before it
+# shows on the profile.
 
 on:
   schedule:
@@ -11,7 +11,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write # only used to commit refreshed SVG snapshots
+  contents: read
 
 concurrency:
   group: stats-cards
@@ -22,7 +22,7 @@ env:
   USERNAME: diogocouto18
 
 jobs:
-  refresh:
+  check:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -64,18 +64,3 @@ jobs:
           }
           fetch stats "/api?username=${USERNAME}&show_icons=true&theme=dark&hide_border=true&count_private=true&show=reviews"
           fetch top-langs "/api/top-langs/?username=${USERNAME}&layout=compact&hide_border=true&theme=dark"
-
-      - name: Commit refreshed snapshots
-        shell: bash
-        run: |
-          cp new/stats.svg assets/stats.svg
-          cp new/top-langs.svg assets/top-langs.svg
-          if git diff --quiet -- assets; then
-            echo "Snapshots unchanged"
-            exit 0
-          fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/stats.svg assets/top-langs.svg
-          git commit -m "[Chore] Refresh Stats Card Snapshots"
-          git push
