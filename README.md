@@ -61,9 +61,11 @@ development, systems infrastructure, DevOps and observability.
 ## GitHub Stats
 
 <p align="left">
-  <img height="165" src="https://github-readme-stats-diogocouto18.vercel.app/api?username=diogocouto18&show_icons=true&theme=dark&hide_border=true&count_private=true&show=reviews" />
-  <img height="165" src="https://github-readme-stats-diogocouto18.vercel.app/api/top-langs/?username=diogocouto18&layout=compact&hide_border=true&theme=dark" />
+  <img height="165" src="assets/stats.svg" alt="Diogo Couto's GitHub stats: total stars, commits, pull requests, reviews and issues" />
+  <img height="165" src="assets/top-langs.svg" alt="Diogo Couto's most used programming languages on GitHub" />
 </p>
+
+<sub>Cards are snapshots refreshed weekly by a GitHub Action (<a href="docs/stats-cards.md">details</a>).</sub>
 
 ## Connect
 

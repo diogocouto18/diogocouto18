@@ -1,0 +1,81 @@
+name: Stats cards
+
+# Weekly health check + snapshot refresh for the self-hosted github-readme-stats
+# instance. The README embeds the committed SVG snapshots in assets/, so the
+# profile keeps rendering even if the Vercel host is down or its PAT expired.
+# A failed run makes GitHub email the repository owner.
+
+on:
+  schedule:
+    - cron: "17 6 * * 1" # Mondays 06:17 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write # only used to commit refreshed SVG snapshots
+
+concurrency:
+  group: stats-cards
+  cancel-in-progress: false
+
+env:
+  HOST: https://github-readme-stats-diogocouto18.vercel.app
+  USERNAME: diogocouto18
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Check PAT expiry date
+        shell: bash
+        run: |
+          # .github/pat-expiry holds the PAT_1 expiry as YYYY-MM-DD (see docs/stats-cards.md).
+          value="$(tr -d '[:space:]' < .github/pat-expiry)"
+          if ! [[ "$value" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; then
+            echo "::warning::PAT expiry date not recorded in .github/pat-expiry (see docs/stats-cards.md)"
+            exit 0
+          fi
+          days=$(( ( $(date -d "$value" +%s) - $(date +%s) ) / 86400 ))
+          echo "PAT expires in ${days} days ($value)"
+          if [ "$days" -le 21 ]; then
+            echo "::error::PAT_1 expires in ${days} days ($value); rotate it on Vercel"
+            exit 1
+          fi
+
+      - name: Fetch and validate cards
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p new
+          fetch() { # name, path+query
+            curl --fail --silent --show-error --location --max-time 60 --retry 3 --retry-delay 10 \
+              -D "new/$1.headers" -o "new/$1.svg" "$HOST$2"
+            grep -qi '^content-type:.*image/svg+xml' "new/$1.headers" \
+              || { echo "::error::$1: unexpected content type"; exit 1; }
+            grep -q '<svg' "new/$1.svg" \
+              || { echo "::error::$1: response is not an SVG"; exit 1; }
+            # The stats server answers HTTP 200 with an error card on failures (bad/expired PAT, rate limit).
+            if grep -qiE 'Something went wrong|Could not fetch|rate limit|Bad credentials|file an issue' "new/$1.svg"; then
+              echo "::error::$1: the server returned an error card (check PAT_1 on Vercel)"
+              exit 1
+            fi
+          }
+          fetch stats "/api?username=${USERNAME}&show_icons=true&theme=dark&hide_border=true&count_private=true&show=reviews"
+          fetch top-langs "/api/top-langs/?username=${USERNAME}&layout=compact&hide_border=true&theme=dark"
+
+      - name: Commit refreshed snapshots
+        shell: bash
+        run: |
+          cp new/stats.svg assets/stats.svg
+          cp new/top-langs.svg assets/top-langs.svg
+          if git diff --quiet -- assets; then
+            echo "Snapshots unchanged"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/stats.svg assets/top-langs.svg
+          git commit -m "[Chore] Refresh Stats Card Snapshots"
+          git push
