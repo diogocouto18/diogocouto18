@@ -1,0 +1,37 @@
+name: README review reminder
+
+# Opens a checklist issue every quarter so the profile README does not go stale.
+# Uses only the built-in GITHUB_TOKEN.
+
+on:
+  schedule:
+    - cron: "0 9 1 1,4,7,10 *" # 09:00 UTC on Jan/Apr/Jul/Oct 1st
+  workflow_dispatch:
+
+permissions:
+  issues: write
+
+jobs:
+  remind:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Open review issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          title="Quarterly README review ($(date -u +%Y-%m-%d))"
+          open="$(gh issue list --state open --search 'Quarterly README review in:title' --json number --jq length)"
+          if [ "$open" -gt 0 ]; then
+            echo "A review issue is already open; skipping"
+            exit 0
+          fi
+          gh issue create --title "$title" --body "Time for the quarterly profile check.
+
+          - [ ] Highlights list: add new projects, remove or reword paused, deferred or speculative ones
+          - [ ] Links to repositories still work and the repositories are still public
+          - [ ] Pinned repositories match the README highlights (Profile > Customize your pins)
+          - [ ] Tech stack badges reflect what I actually use
+          - [ ] Stats cards still refresh: latest \`Stats cards\` workflow run is green
+          - [ ] PAT expiry date in \`.github/pat-expiry\` is filled in and still valid (see docs/stats-cards.md)"
