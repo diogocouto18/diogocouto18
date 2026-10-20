@@ -9,7 +9,8 @@ The images carry descriptive `alt` text.
 The workflow [`stats-cards.yml`](../.github/workflows/stats-cards.yml) runs weekly (Mondays)
 and:
 
-1. fails if the PAT expiry date recorded in `.github/pat-expiry` is 21 days away or less;
+1. fails if the PAT expiry date recorded in `.github/pat-expiry` is 21 days away or less
+   (nothing to check when the file says `none`);
 2. requests both card URLs and fails on a non-200 response, a non-SVG response, or an
    error card (the server answers `200` with a "Something went wrong" card when the PAT is
    bad or expired).
@@ -27,8 +28,15 @@ Check the token expiry at <https://github.com/settings/tokens> (fine-grained tok
 as `YYYY-MM-DD`. From then on the weekly run fails from 21 days before expiry, which is
 the renewal reminder.
 
-**TODO (owner):** the current expiry date is not recorded yet. `.github/pat-expiry`
-contains `TODO` until it is filled in.
+**Current state:** `.github/pat-expiry` says `none`, i.e. the token is believed to have no
+expiry. This was recorded from the owner's recollection on 2026-10-20 and has not been
+checked against the token settings page (a token without expiry is listed there as
+"Never expires"). If it turns out to have a date, write that date (`YYYY-MM-DD`) instead.
+
+With `none` there is no advance warning, so the safety net is step 2 above: if the token
+stops working, the cards turn into error cards and the next Monday run fails, which means
+the profile can show broken cards for up to a week before the failure email arrives.
+Re-check the token settings during the quarterly review.
 
 ## Rotating the token
 

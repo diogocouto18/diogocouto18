@@ -31,8 +31,12 @@ jobs:
       - name: Check PAT expiry date
         shell: bash
         run: |
-          # .github/pat-expiry holds the PAT_1 expiry as YYYY-MM-DD (see docs/stats-cards.md).
+          # .github/pat-expiry holds the PAT_1 expiry as YYYY-MM-DD, or `none` (see docs/stats-cards.md).
           value="$(tr -d '[:space:]' < .github/pat-expiry)"
+          if [ "$value" = "none" ]; then
+            echo "::notice::PAT_1 is recorded as never expiring (.github/pat-expiry); the card checks below are the safety net"
+            exit 0
+          fi
           if ! [[ "$value" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; then
             echo "::warning::PAT expiry date not recorded in .github/pat-expiry (see docs/stats-cards.md)"
             exit 0
